@@ -83,12 +83,6 @@
 	</context-param>
 	-->
 	
-<<<<<<< HEAD
-	<context-param>  
-	    <param-name>primefaces.THEME</param-name>  
-	    <param-value>bootstrap</param-value>  
-	</context-param>	
-=======
 	<context-param>
 	    <param-name>primefaces.THEME</param-name>
 	    <param-value>bootstrap</param-value>
@@ -103,7 +97,6 @@
 	    <param-name>BootsFaces_USETHEME</param-name>
 	    <param-value>true</param-value>
 	</context-param>
->>>>>>> a58c367956092563bd9ab623e6d759ce09bc6696
 	
 	<!--
 	<context-param>
