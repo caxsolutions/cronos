@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui "
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+		<h:form id="formMenuLeft">
+			
+			<b:navBar brand="Cronos" brandHref="#">
+			    <b:navbarLinks>
+			        <b:navLink value="Home" id="navcreat" update="@([id=principalePanel])" onclick="ajax:viewportView.setPage('test3.xhtml')"/>
+			        <b:navLink value="Link" id="fedrt" update=":#{p:component('principalePanel')}" onclick="ajax:viewportView.setPage('test4.xhtml')"/>
+
+					<b:dropMenu value="Dropdown">
+				        <b:navLink value="Promotores" id="navcreat2" update="@([id=principalePanel])" onclick="ajax:viewportView.setPage('test3.xhtml')"/>
+				        <b:navLink value="Cleintes" id="fedrt2" update=":#{p:component('principalePanel')}" onclick="ajax:viewportView.setPage('test4.xhtml')"/>
+				        <b:navLink value="Vehiculos" id="fedrt3" update=":#{p:component('principalePanel')}" onclick="ajax:viewportView.setPage('p10vehiculos.xhtml')"/>
+			        </b:dropMenu>			        
+			    </b:navbarLinks>
+			</b:navBar>
+			
+			<!--
+			<p:accordionPanel id="panelMenuLeft">
+				<p:tab title="R H" id="tabMenuLeft">
+					<b:flyOutMenu id="ferd">
+						<b:navLink value="New Compte" id="navcreat"
+							update="@([id=principalePanel])"
+							onclick="ajax:viewportView.setPage('test3.xhtml')" />
+						<b:navLink value="search" id="fedrt"
+							update=":#{p:component('principalePanel')}"
+							onclick="ajax:viewportView.setPage('test4.xhtml')" />
+					</b:flyOutMenu>
+				</p:tab>
+			</p:accordionPanel>
+			-->
+			
+		</h:form>
+</ui:fragment>

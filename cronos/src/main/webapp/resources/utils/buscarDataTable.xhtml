@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:utils="http://java.sun.com/jsf/composite/utils">
+<head>
+<title></title>
+<link rel="stylesheet" type="text/css"
+	href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+</head>
+<body>
+	<composite:interface>
+
+	    <!-- tabla -->
+		<composite:attribute name="rowsTable" default="50" />
+		<composite:attribute name="value" type="java.util.List"/>
+		<composite:attribute name="filteredValue" type="java.util.List"/>
+		<composite:attribute name="id" />
+		<composite:attribute name="renderedBoton" default="true" />
+		<composite:attribute name="selected" />
+		<composite:attribute name="rowKeyId" />
+        <composite:attribute name="scrollHeightTable" default="285" />
+        <composite:attribute name="ajaxListener" /> 
+		<composite:attribute name="ajaxUpdate" />
+		<composite:attribute name="elementFocusRowSelection" default="txtFocusRowSelectionSindefinir"/>
+		
+		<!-- boton -->
+		<composite:attribute name="actionSearch" />
+		<composite:attribute name="updateBoton" />
+		<composite:attribute name="valueButton" default="Buscar"/>
+		
+		<!-- dialogo -->
+		<composite:attribute name="headerDialogo" />
+		<composite:attribute name="heightDialogo" default="450" />
+		<composite:attribute name="widthDialogo" default="700" />
+		<composite:attribute name="actionCloseDialog" />
+		<composite:attribute name="bean" />
+		
+		<!-- imprimir -->
+		<composite:attribute name="renderedBotonExportar" />
+		<composite:attribute name="visibleListaDetallada" />
+		<composite:attribute name="visibleImprimirSombreado" />
+		<composite:attribute name="accionCons" />
+		<composite:attribute name="accionExp" />
+		<composite:attribute name="accionCerrar" />
+		
+		<composite:attribute name="valorVistaPrevia" />
+		<composite:attribute name="methodVistaPreviaExportar" />
+		<composite:attribute name="methodVistaPreviaDeleteExportar" />
+		<composite:attribute name="idForm" />
+		<composite:attribute name="visibleBotonVistaPrevia" />
+		
+	</composite:interface>
+	
+
+	<composite:implementation>
+	
+	<p:commandButton type="push" value="#{cc.attrs.valueButton}" icon="ui-icon-search" oncomplete="PF('dialogDataTablewidgetVar').show();" 
+					 rendered="#{cc.attrs.renderedBoton}" 
+	                 action="#{cc.attrs.bean[cc.attrs.actionSearch]}"  update="#{cc.attrs.updateBoton}" process="@this" id="btnDataTable"/>
+
+		<p:dialog rendered="#{cc.attrs.renderedBoton}" 
+				closeOnEscape="true" header="#{cc.attrs.headerDialogo}" id="dialogLDataTable" resizable="false" 
+		          showEffect="explode" hideEffect="explode" modal="true" widgetVar="dialogDataTablewidgetVar"  
+		          width="#{cc.attrs.widthDialogo}"  height="#{cc.attrs.heightDialogo}">
+		          
+		        <p:ajax event="close" listener="#{cc.attrs.bean[cc.attrs.actionCloseDialog]}"/>	
+
+				<utils:imprimir bean="#{cc.attrs.bean}"
+								id="cmpImprimir"
+				                accionCons="#{cc.attrs.accionCons}"
+				                accionExp="#{cc.attrs.accionExp}"
+				                accionCerrar="#{cc.attrs.accionCerrar}" 
+				                visibleListaDetallada="#{cc.attrs.visibleListaDetallada}"
+				                visibleImprimirSombreado="#{cc.attrs.visibleImprimirSombreado}"
+				                renderedExportar="#{cc.attrs.renderedBotonExportar}"
+				                valorVistaPrevia="#{cc.attrs.valorVistaPrevia}"
+				                methodVistaPreviaExportar="#{cc.attrs.methodVistaPreviaExportar}"
+				                methodVistaPreviaDeleteExportar="#{cc.attrs.methodVistaPreviaDeleteExportar}"
+				                idForm="#{cc.attrs.idForm}:cmpImprimir"
+				                visibleBotonVistaPrevia="#{cc.attrs.visibleBotonVistaPrevia}"/>
+
+				<p:dataTable id="#{cc.attrs.id}" widgetVar="dataTablewidgetVar"  paginatorPosition="bottom" emptyMessage="No hay registros para mostrar" 
+				             var="listaDataTable" value="#{cc.attrs.value}" paginator="true" rows="#{cc.attrs.rowsTable}"
+				             selectionMode="single"  selection="#{cc.attrs.selected}"   resizableColumns="true" scrollable="true" scrollHeight="#{cc.attrs.scrollHeightTable}"
+				             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+				             currentPageReportTemplate=" {startRecord}-{endRecord} de {totalRecords} "
+				             rowKey="#{cc.attrs.rowKeyId}" rendered="#{cc.attrs.renderedBoton}" 
+				             filteredValue="#{cc.attrs.filteredValue}"
+				             >
+					        
+	                <p:ajax event="rowSelect" listener="#{cc.attrs.bean[cc.attrs.ajaxListener]}" update="#{cc.attrs.ajaxUpdate}" 
+	                oncomplete="PF('dialogDataTablewidgetVar').hide();
+	                if(document.getElementById('#{cc.attrs.elementFocusRowSelection}') !=null) document.getElementById('#{cc.attrs.elementFocusRowSelection}').focus();
+	                "/>
+					
+					<f:facet name="header">					
+						<p:outputPanel>
+							<h:outputText value="Filtrar:" />
+							<h:inputText id="globalFilter" onkeyup="PF('dataTablewidgetVar').filter()" />
+						</p:outputPanel>
+				    </f:facet>	
+				    
+	                <composite:insertChildren /> 
+				</p:dataTable>
+				
+				<p:spacer></p:spacer>
+		</p:dialog>
+    <!-- Data table para el evento buscar del maestro-->
+
+	</composite:implementation>
+	
+</body>
+</html>

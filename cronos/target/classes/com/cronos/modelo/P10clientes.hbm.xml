@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/07/2016 09:47:48 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P10clientes" table="p10clientes" schema="public" optimistic-lock="version">
+        <comment>clientes</comment>
+        <id name="rowidcliente" type="java.lang.Integer">
+            <column name="rowidcliente" />
+            <generator class="sequence" >
+		        <param name="sequence">p10clientes_rowidcliente_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="p00empresa" class="com.cronos.modelo.P00empresa" fetch="select">
+            <column name="rowidempresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidtipoidentificacion" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidtipoidentificacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidtipocliente" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidtipocliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidsexo" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidsexo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidestadocivil" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidestadocivil" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidtipoprofesion" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidtipoprofesion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00municipio" class="com.cronos.modelo.P00municipio" fetch="select">
+            <column name="rowidmunicipio" />
+        </many-to-one>
+        <property name="numeroidentificacion" type="java.lang.String">
+            <column name="numeroidentificacion" length="60" not-null="true" />
+        </property>
+        <property name="digitoverificacion" type="java.lang.String">
+            <column name="digitoverificacion" length="2" not-null="true" />
+        </property>
+        <property name="razonsocial" type="java.lang.String">
+            <column name="razonsocial" length="120" />
+        </property>
+        <property name="nombres" type="java.lang.String">
+            <column name="nombres" length="60" not-null="true" />
+        </property>
+        <property name="apellidos" type="java.lang.String">
+            <column name="apellidos" length="60" not-null="true" />
+        </property>
+        <property name="fechanacimiento" type="java.util.Date">
+            <column name="fechanacimiento" length="13" />
+        </property>
+        <property name="direccion" type="java.lang.String">
+            <column name="direccion" length="60" />
+        </property>
+        <property name="telefono" type="java.lang.String">
+            <column name="telefono" length="60" />
+        </property>
+        <property name="correopersonal" type="java.lang.String">
+            <column name="correopersonal" length="100" />
+        </property>
+        <property name="tienehijos" type="boolean">
+            <column name="tienehijos" not-null="true" />
+        </property>
+        <property name="descripcionprofesion" type="java.lang.String">
+            <column name="descripcionprofesion" length="100" />
+        </property>
+        <property name="empresalabora" type="java.lang.String">
+            <column name="empresalabora" length="100" />
+        </property>
+        <property name="direccionempresa" type="java.lang.String">
+            <column name="direccionempresa" length="60" />
+        </property>
+        <property name="telefonoempresa" type="java.lang.String">
+            <column name="telefonoempresa" length="60" />
+        </property>
+        <property name="habilita" type="boolean">
+            <column name="habilita" not-null="true" />
+        </property>
+        <property name="celular" type="java.lang.String">
+            <column name="celular" length="200" />
+        </property>
+        <property name="correoinstitucional" type="java.lang.String">
+            <column name="correoinstitucional" length="200" />
+        </property>
+        <property name="cantidadhijos" type="java.lang.Integer">
+            <column name="cantidadhijos"/>
+        </property>
+        <property name="titularvivienda" type="java.lang.Integer">
+            <column name="titularvivienda"/>
+        </property>
+        <set name="p10vehiculoses" table="p10vehiculos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidcliente" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10vehiculos" />
+        </set>
+        <set name="p10soats" table="p10soat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidtomador" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10soat" />
+        </set>
+
+        
+    </class>
+</hibernate-mapping>

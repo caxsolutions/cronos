@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<ui:include src="/resources/utils/general.xhtml"/>
+</h:head>		
+
+<h:body>
+	<h:form id="formP10vehiculos">
+
+		<p:toolbar id="toolbarFormP10vehiculos">
+	        <f:facet name="left">
+	            <p:commandButton process="@this" id="btnNuevo" action="#{p10vehiculosView.action_new}" update="@(form)"  binding="#{p10vehiculosView.btnNuevo}"  value="Nuevo" icon="ui-icon-document" />
+	            <p:commandButton process="@this" value="Buscar" icon="ui-icon-search" oncomplete="PF('widgetDialogBusquedaPrincipal').show();" action="#{p10vehiculosView.action_search}" update="formP10vehiculos:dialogBusquedaPrincipal"/>
+	            <p:commandButton process="@form" id="btnGuardar" action="#{p10vehiculosView.action_save}" update="@(this)" binding="#{p10vehiculosView.btnGuardar}" value="Guardar" icon="ui-icon-disk" />
+	            <p:commandButton value="Eliminar" binding="#{p10vehiculosView.btnDelete}" icon="ui-icon-trash" oncomplete="PF('widgetConfirmDelete').show();"/>
+	 
+	            <span class="ui-separator">
+	                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	            
+	            <p:commandButton value="Generar SOAT" binding="#{p10vehiculosView.btnGenerarSOAT}" icon="ui-icon-note" action="#{p10vehiculosView.action_metodoAbrirDialogGenerarSOAT}" update="formP10vehiculos:dialogGenerarSoat"/>
+	        </f:facet>
+	    </p:toolbar>	
+	    
+	    <p:sticky target="toolbarFormP10vehiculos" />
+	    
+	    <p></p>
+	
+		<p:panel id="panelP10vehiculos" header="Vehiculos">
+
+			<p:panel>
+				<h:panelGrid columns="500">
+					
+					<p:outputLabel for="txtNroPLaca" value="Placa:" /><p:spacer width="20" height="0"/>
+			        <p:inputText id="txtNroPLaca" binding="#{p10vehiculosView.txtNroPLaca}" size="10" maxlength="6" onkeyup="this.value=this.value.toUpperCase();"/>
+
+					<p:outputLabel for="txtCodigoFasecolda" value="Codigo fasecolda:" />
+			        <p:inputText id="txtCodigoFasecolda" binding="#{p10vehiculosView.txtCodigoFasecolda}" size="10"/>
+			        
+			        <p:commandButton icon="ui-icon-search" action="#{p10vehiculosView.action_buscarDestalleCodigoFasecolda}"/>
+			        
+					<h:panelGrid columns="5">
+	
+				        <p:outputLabel for="selTipoIdentificacionPropietario" value="Propietario:" />
+				        <p:selectOneMenu id="selTipoIdentificacionPropietario" value="#{p10vehiculosView.selTipoIdentificacionPropietario}" style="width:125px">
+							<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+			                <f:selectItems value="#{p10vehiculosView.selTipoIdentificacionPropietarioList}" var="viaPropietario" />
+			                <p:ajax event="change" listener="#{p10vehiculosView.onRowBuscarPropietario}" update="formP10vehiculos:txtRazonSocialPropietario"/>
+				        </p:selectOneMenu>
+				        
+				        <p:inputText id="txtNroIdentificacionPropietario" binding="#{p10vehiculosView.txtNroIdentificacionPropietario}" size="15" maxlength="60" style="background-color:#feffb8">
+				        	<p:ajax event="blur" process="@(form)" listener="#{p10vehiculosView.onRowBuscarPropietario}" update="formP10vehiculos:txtRazonSocialPropietario"/>
+				        </p:inputText>
+	
+				        <p:inputText id="txtRazonSocialPropietario" binding="#{p10vehiculosView.txtRazonSocialPropietario}" size="40"/>
+				        <p:commandButton process="@form" icon="ui-icon-search" actionListener="#{p10vehiculosView.action_dialogDatosPropietario}"/>
+					
+					</h:panelGrid>
+
+					<p:dialog header="Detalle del vehiculo" widgetVar="widgetDialogDetalleFasecolda" width="900" height="400" modal="true">
+
+						 <iframe id="iframeCenter" src="http://fasecolda.colserauto.com/fasecolda.web/publico/Detalle2.aspx?idCodigo=2786" width="100%" height="100%" frameborder="0"/>  
+						
+			 	        <f:facet name="footer">
+			              		<p:commandButton value="Cerrar" icon="ui-icon-close" oncomplete="PF('widgetDialogDetalleFasecolda').hide();"/>
+			          		</f:facet> 					
+					</p:dialog>
+				</h:panelGrid>
+			</p:panel>
+			
+			<p></p>
+			
+			<p:fieldset legend="Datos del vehiculo">
+				<h:panelGrid columns="6">
+
+			        <p:outputLabel for="selClaseVehiculo" value="Clase del vehiculo:" />
+			        <p:selectOneMenu id="selClaseVehiculo" value="#{p10vehiculosView.selClaseVehiculo}" style="width:100px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10vehiculosView.selClaseVehiculoList}" var="viaClaseVehiculo" />
+			        </p:selectOneMenu>
+			        
+			        <p:outputLabel for="selTipoServicio" value="Servicio:" />
+			        <p:selectOneMenu id="selTipoServicio" value="#{p10vehiculosView.selTipoServicio}" style="width:100px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10vehiculosView.selTipoServicioList}" var="viaTipoServicio" />
+			        </p:selectOneMenu>
+
+					<p:outputLabel for="txtCilindraje" value="Cilindraje/Vatios:" />
+			        <p:inputText id="txtCilindraje" binding="#{p10vehiculosView.txtCilindraje}" size="16"/>
+
+					<p:outputLabel for="txtModelo" value="Modelo:" />
+			        <p:inputText id="txtModelo" binding="#{p10vehiculosView.txtModelo}" size="16"/>
+
+					<p:outputLabel for="txtNroPasajeros" value="Nro pasajeros:" />
+			        <p:inputText id="txtNroPasajeros" binding="#{p10vehiculosView.txtNroPasajeros}" size="16"/>
+
+					<p:outputLabel for="txtCapacidadToneladas" value="Capacidad ton.:" />
+			        <p:inputText id="txtCapacidadToneladas" binding="#{p10vehiculosView.txtCapacidadToneladas}" size="16"/>
+				
+				</h:panelGrid>
+
+				<p></p>
+
+				<h:panelGrid columns="4">
+
+					<p:outputLabel for="txtNroMotor" value="Nro motor:" />
+			        <p:inputText id="txtNroMotor" binding="#{p10vehiculosView.txtNroMotor}" size="50"/>
+
+					<p:outputLabel for="txtNroMotorSerie" value="Nro chasis o Nro serie:" />
+			        <p:inputText id="txtNroMotorSerie" binding="#{p10vehiculosView.txtNroMotorSerie}" size="50"/>
+				
+				</h:panelGrid>
+			</p:fieldset>
+			
+			<p></p>
+			
+			<p:panel header="SOAT del vehiculo">
+				<p:dataTable var="dataTableSoatVehiculo" value="#{p10vehiculosView.dataTableSoatVehiculoList}"
+					selectionMode="single" selection="#{p10vehiculosView.selDataTableSoatVehiculo}" rowKey="#{dataTableSoatVehiculo.rowidsoat}" scrollHeight="40"
+					rows="60" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				 
+				    <p:column headerText="Vigencia" filterBy="#{dataTableSoatVehiculo.estadovigencia}" sortBy="#{dataTableSoatVehiculo.estadovigencia}">
+				        <h:outputText value="#{dataTableSoatVehiculo.estadovigencia}" />
+				    </p:column>
+
+				    <p:column headerText="Fecha expedición" filterBy="#{dataTableSoatVehiculo.fechaexpedicion}" sortBy="#{dataTableSoatVehiculo.fechaexpedicion}">
+				        <h:outputText value="#{dataTableSoatVehiculo.fechaexpedicion}">
+				        	<f:convertDateTime pattern="yyyy-MM-dd" />
+				        </h:outputText>
+
+					    <p:contextMenu>
+					        <p:menuitem value="Inhabilitar" icon="ui-icon-flag" onclick="PF('confirmInhabilitaSoat').show()"/>
+					    </p:contextMenu>
+				    </p:column>
+
+				    <p:column headerText="Fecha Inicio vigencia" filterBy="#{dataTableSoatVehiculo.fechainiciovigencia}" sortBy="#{dataTableSoatVehiculo.fechainiciovigencia}">
+				        <h:outputText value="#{dataTableSoatVehiculo.fechainiciovigencia}" >
+				        	<f:convertDateTime pattern="yyyy-MM-dd 00:00:00" />
+				        </h:outputText>
+				    </p:column>
+
+				    <p:column headerText="Fecha Final vigencia" filterBy="#{dataTableSoatVehiculo.fechafinalvigencia}" sortBy="#{dataTableSoatVehiculo.fechafinalvigencia}">
+				        <h:outputText value="#{dataTableSoatVehiculo.fechafinalvigencia}" >
+				        	<f:convertDateTime pattern="yyyy-MM-dd 23:59:59"/>
+				        </h:outputText>
+				    </p:column>
+	
+				    <p:column headerText="Tomador" filterBy="#{dataTableSoatVehiculo.p10clientes.numeroidentificacion}" sortBy="#{dataTableSoatVehiculo.p10clientes.numeroidentificacion}">
+				        <h:outputText value="#{dataTableSoatVehiculo.p10clientes.numeroidentificacion}" />
+				    </p:column>
+	
+				    <p:column headerText="Nombres" filterBy="#{dataTableSoatVehiculo.p10clientes.nombres}" sortBy="#{dataTableSoatVehiculo.p10clientes.nombres}">
+				        <h:outputText value="#{dataTableSoatVehiculo.p10clientes.nombres}" />
+				    </p:column>
+	
+				    <p:column headerText="Apellidos" filterBy="#{dataTableSoatVehiculo.p10clientes.apellidos}" sortBy="#{dataTableSoatVehiculo.p10clientes.apellidos}">
+				        <h:outputText value="#{dataTableSoatVehiculo.p10clientes.apellidos}" />
+				    </p:column>
+	
+				    <p:column headerText="Estado" filterBy="#{dataTableSoatVehiculo.estadosoat}" sortBy="#{dataTableSoatVehiculo.estadosoat}">
+				        <h:outputText value="#{dataTableSoatVehiculo.estadosoat}" />
+				    </p:column>
+				</p:dataTable>
+			</p:panel>
+			
+			<p:dialog showEffect="fade" hideEffect="fade" widgetVar="confirmInhabilitaSoat" header="Inhabiltiar SOAT" message="Desea inhabilitar el registro?">
+				<p:inputTextarea rows="10" cols="50" binding="#{p10vehiculosView.observacionesinhabiltiarsoat}" />
+ 		        
+	 	        <f:facet name="footer">
+	 		        <p:commandButton value="Si" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{p10vehiculosView.action_inhabilitarSoat}"/>
+			        <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('confirmInhabilitaSoat').hide()"/>
+	       		</f:facet> 					
+		    </p:dialog>			
+			
+		</p:panel>
+		
+		<p:dialog id="dialogGenerarSoat" header="Generando SOAT" widgetVar="widgetDialogGenerarSoat" width="850" height="400" modal="true">
+			<p:panel id="panelPrincipaDialogGenerarSOAT">
+			
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Fecha de expedición" />
+					
+					<h:panelGrid columns="3">
+						<p:outputLabel value="------------------------------------------------" />
+						<p:outputLabel value="Vigencia" />
+						<p:outputLabel value="------------------------------------------------" />
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+						<p:calendar binding="#{p10vehiculosView.calFechaExpedicion}" pattern="yyyy-MM-dd" mask="true" size="8" showOn="button"/>
+					</h:panelGrid>
+
+					<h:panelGrid columns="4">
+						<p:outputLabel value="Desde las 00 Horas DEL"/>
+						<p:calendar binding="#{p10vehiculosView.calFechaInicioVigencia}" pattern="yyyy-MM-dd" mask="true" size="8" showOn="button">
+							<p:ajax event="dateSelect" listener="#{p10vehiculosView.eventoCambiarFechaInicioVigencia}" update="formP10vehiculos:calFechaFinalVigencia"/>
+						</p:calendar>
+						<p:outputLabel value="Hasta las 24 Horas DEL"/>
+						<p:calendar id="calFechaFinalVigencia" binding="#{p10vehiculosView.calFechaFinalVigencia}" pattern="yyyy-MM-dd" mask="true" disabled="true" size="8" readonly="true"/>
+					</h:panelGrid>
+				
+				</h:panelGrid>
+				
+				<p></p>
+
+				<p:fieldset legend="Datos del tomador">
+					
+					<h:panelGrid columns="3">
+					
+				        <p:outputLabel for="selTipoTomador" value="Tomador:" />
+				        <p:selectOneMenu id="selTipoTomador" value="#{p10vehiculosView.selTipoTomador}"  style="width:100px">
+			                <f:selectItems value="#{p10vehiculosView.selTipoTomadorList}" var="viaTipoTomador" />
+			                <p:ajax event="change" listener="#{p10vehiculosView.action_cambioTipoTomador}" 
+			                		update=":formP10vehiculos:panelPrincipaDialogGenerarSOAT"/>
+				        </p:selectOneMenu>
+				        
+				        <p:commandButton id="btnCrearTomador" binding="#{p10vehiculosView.btnCrearTomador}" icon="ui-icon-document" action="#{p10vehiculosView.cargarDataOpenDialogFramework(null)}" rendered="false">
+				        	<p:ajax event="dialogReturn" listener="#{p10vehiculosView.returnCreateTomador}"/>
+				        </p:commandButton>
+
+	                    <p:panel id="panelTomadorExistente" widgetVar="widgetPanelTomadorExistente" binding="#{p10vehiculosView.panelTomadorExistente}">
+	                        <h:panelGrid columns="4">
+	                            <p:selectOneMenu id="selTipoIdentificacionTomador" value="#{p10vehiculosView.selTipoIdentificacionTomador}" style="width:125px">
+	                                <f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+	                                <f:selectItems value="#{p10vehiculosView.selTipoIdentificacionTomadorList}" var="viaTomador"/>
+	                                <p:ajax event="change" listener="#{p10vehiculosView.onRowBuscarTomador}" update="formP10vehiculos:txtRazonSocialTomador"/>
+	                            </p:selectOneMenu>
+	                            
+	                            <p:inputText id="txtNroIdentificacionTomador" binding="#{p10vehiculosView.txtNroIdentificacionTomador}" size="10" maxlength="60" style="background-color:#feffb8">
+	                                <p:ajax event="blur" process="@form" listener="#{p10vehiculosView.onRowBuscarTomador}" update="formP10vehiculos:txtRazonSocialTomador"/>
+	                            </p:inputText>
+	        
+	                            <p:inputText id="txtRazonSocialTomador" binding="#{p10vehiculosView.txtRazonSocialTomador}" size="40"/>
+	                            <p:commandButton process="@form" icon="ui-icon-search" action="#{p10vehiculosView.action_dialogDatosTomador}"/>
+	                        </h:panelGrid>  
+	                    </p:panel>
+
+					</h:panelGrid>
+				</p:fieldset>
+			
+			</p:panel>
+
+ 	        <f:facet name="footer">
+           		<p:commandButton value="Agregar" icon="ui-icon-disk" actionListener="#{p10vehiculosView.action_agregarSoatVehiculo}"/>
+           		<p:commandButton value="Cerrar" icon="ui-icon-close" oncomplete="PF('widgetDialogGenerarSoat').hide();"/>
+       		</f:facet> 					
+		</p:dialog>
+		
+		<!-- *********************************************************************************************************** -->
+	    <p:confirmDialog showEffect="explode" hideEffect="explode" widgetVar="widgetConfirmDelete" header="Eliminar registro" message="Desea eliminar el registro?">
+			<p:commandButton value="Si" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" process="@form" action="#{p10vehiculosView.action_delete}" update="@(form)" oncomplete="PF('widgetConfirmDelete').hide();"/>
+			<p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('widgetConfirmDelete').hide();"/>
+		</p:confirmDialog>
+
+		<p:dialog id="dialogBusquedaPrincipal" header="Busqueda clientes" widgetVar="widgetDialogBusquedaPrincipal" width="700" height="400" modal="true">
+		
+			<p:dataTable var="busquedaPrincipal" value="#{p10vehiculosView.busquedaPrincipalList}"
+				selectionMode="single" selection="#{p10vehiculosView.busquedaPrincipal}" rowKey="#{busquedaPrincipal.rowidvehiculos}"
+				rows="60" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			 
+			 	<p:ajax event="rowSelect" listener="#{p10vehiculosView.onRowSelect}" update="@(form)" />
+			 
+			    <p:column headerText="Placa" filterBy="#{busquedaPrincipal.numeroplaca}" sortBy="#{busquedaPrincipal.numeroplaca}">
+			        <h:outputText value="#{busquedaPrincipal.numeroplaca}" />
+			    </p:column>
+
+			    <p:column headerText="Código fasecolda" filterBy="#{busquedaPrincipal.codigofasecolda}" sortBy="#{busquedaPrincipal.codigofasecolda}">
+			        <h:outputText value="#{busquedaPrincipal.codigofasecolda}" />
+			    </p:column>
+
+			    <p:column headerText="Propietario" filterBy="#{busquedaPrincipal.p10clientes.numeroidentificacion}" sortBy="#{busquedaPrincipal.p10clientes.numeroidentificacion}">
+			        <h:outputText value="#{busquedaPrincipal.p10clientes.numeroidentificacion}" />
+			    </p:column>
+
+			    <p:column headerText="Nombres" filterBy="#{busquedaPrincipal.p10clientes.nombres}" sortBy="#{busquedaPrincipal.p10clientes.nombres}">
+			        <h:outputText value="#{busquedaPrincipal.p10clientes.nombres}" />
+			    </p:column>
+
+			    <p:column headerText="Apellidos" filterBy="#{busquedaPrincipal.p10clientes.apellidos}" sortBy="#{busquedaPrincipal.p10clientes.apellidos}">
+			        <h:outputText value="#{busquedaPrincipal.p10clientes.apellidos}" />
+			    </p:column>
+			</p:dataTable>
+			
+ 	        <f:facet name="footer">
+           		<p:commandButton value="Cerrar" icon="ui-icon-close" oncomplete="PF('widgetDialogBusquedaPrincipal').hide();"/>
+       		</f:facet> 					
+		</p:dialog>
+		<!-- *********************************************************************************************************** -->
+		
+	</h:form>
+</h:body>	
+</html>	

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/07/2016 09:47:48 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P00perfil" table="p00perfil" schema="public" optimistic-lock="version">
+        <comment>Perfil de usuarios</comment>
+        <id name="rowidperfil" type="java.lang.Integer">
+            <column name="rowidperfil" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="p00empresa" class="com.cronos.modelo.P00empresa" fetch="select">
+            <column name="rowidempresa" not-null="true" />
+        </many-to-one>
+        <property name="perfil" type="java.lang.String">
+            <column name="perfil" length="4" not-null="true">
+                <comment>C?digo de perfil</comment>
+            </column>
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="nombre" length="60" not-null="true">
+                <comment>Nombre de perfil</comment>
+            </column>
+        </property>
+        <property name="diasvigencia" type="java.lang.Integer">
+            <column name="diasvigencia" not-null="true">
+                <comment>N?mero de d?as de vigencia de contrase?as</comment>
+            </column>
+        </property>
+        <property name="habilita" type="boolean">
+            <column name="habilita" not-null="true">
+                <comment>Perfil habilitado para su uso en el sistema?</comment>
+            </column>
+        </property>
+        <set name="p00perfilmenus" table="p00perfilmenu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidperfil" not-null="true">
+                    <comment>Identificador de perfil de usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="com.cronos.modelo.P00perfilmenu" />
+        </set>
+        <set name="p00usuarios" table="p00usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidperfil" not-null="true">
+                    <comment>Identificador de perfil de usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="com.cronos.modelo.P00usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

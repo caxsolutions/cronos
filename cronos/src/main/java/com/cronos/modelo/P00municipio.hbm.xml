@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/07/2016 11:18:05 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P00municipio" table="p00municipio" schema="public" optimistic-lock="version">
+        <comment>Municipios del pa?s</comment>
+        <id name="idmunicipio" type="java.lang.Integer">
+            <column name="idmunicipio" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="p00departamento" class="com.cronos.modelo.P00departamento" fetch="select">
+            <column name="iddepartamento" not-null="true">
+                <comment>Identificador de departamento</comment>
+            </column>
+        </many-to-one>
+        <property name="municipio" type="java.lang.String">
+            <column name="municipio" length="5" not-null="true" unique="true">
+                <comment>C?digo de municipio</comment>
+            </column>
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="nombre" length="50" not-null="true">
+                <comment>Nombre de municipio</comment>
+            </column>
+        </property>
+        <set name="p10clienteses" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidmunicipio" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+    </class>
+</hibernate-mapping>

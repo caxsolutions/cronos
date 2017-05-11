@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/07/2016 12:42:40 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P10vehiculos" table="p10vehiculos" schema="public" optimistic-lock="version">
+        <comment>vehiculos</comment>
+        <id name="rowidvehiculos" type="java.lang.Integer">
+            <column name="rowidvehiculos" />
+            <generator class="sequence" >
+		        <param name="sequence">p10vehiculos_rowidvehiculos_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="p00empresa" class="com.cronos.modelo.P00empresa" fetch="select">
+            <column name="rowidempresa" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidclasevehiculo" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidclasevehiculo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p00listaopcionByRowidtiposervicio" class="com.cronos.modelo.P00listaopcion" fetch="select">
+            <column name="rowidtiposervicio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p10clientes" class="com.cronos.modelo.P10clientes" fetch="select">
+            <column name="rowidcliente" not-null="true" />
+        </many-to-one>
+        <property name="numeroplaca" type="java.lang.String">
+            <column name="numeroplaca" length="6" not-null="true" />
+        </property>
+        <property name="codigofasecolda" type="java.lang.String">
+            <column name="codigofasecolda" length="20" />
+        </property>
+        <property name="cilindraje" type="java.lang.String">
+            <column name="cilindraje" length="10" />
+        </property>
+        <property name="modelo" type="java.lang.String">
+            <column name="modelo" length="6" />
+        </property>
+        <property name="nropasajeros" type="java.lang.String">
+            <column name="nropasajeros" length="6" />
+        </property>
+        <property name="capacidadtoneladas" type="java.lang.Integer">
+            <column name="capacidadtoneladas" />
+        </property>
+        <property name="nromotor" type="java.lang.String">
+            <column name="nromotor" length="100" />
+        </property>
+        <property name="nrochasis" type="java.lang.String">
+            <column name="nrochasis" length="100" />
+        </property>
+        <set name="p10soats" table="p10soat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidvehiculo" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10soat" />
+        </set>
+    </class>
+</hibernate-mapping>

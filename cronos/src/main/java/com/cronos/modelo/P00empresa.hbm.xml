@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/07/2016 09:47:48 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P00empresa" table="p00empresa" schema="public" optimistic-lock="version">
+        <comment>Empresas en un sistema MultiEmpresa</comment>
+        <id name="rowidempresa" type="java.lang.Integer">
+            <column name="rowidempresa" />
+            <generator class="assigned" />
+        </id>
+        <property name="empresa" type="java.lang.String">
+            <column name="empresa" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="descripcion" type="java.lang.String">
+            <column name="descripcion" length="20" not-null="true" />
+        </property>
+        <property name="nit" type="java.lang.String">
+            <column name="nit" length="20" not-null="true" />
+        </property>
+        <property name="digitoverificacion" type="java.lang.Integer">
+            <column name="digitoverificacion" not-null="true" />
+        </property>
+        <property name="direccion" type="java.lang.String">
+            <column name="direccion" length="50" />
+        </property>
+        <property name="telefono" type="java.lang.String">
+            <column name="telefono" length="50" />
+        </property>
+        <property name="correo" type="java.lang.String">
+            <column name="correo" length="100" />
+        </property>
+        <property name="habilita" type="boolean">
+            <column name="habilita" not-null="true" />
+        </property>
+        <property name="logo1" type="java.lang.String">
+            <column name="logo1" />
+        </property>
+        <set name="p10vehiculoses" table="p10vehiculos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidempresa" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10vehiculos" />
+        </set>
+        <set name="p00usuarios" table="p00usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidempresa" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P00usuario" />
+        </set>
+        <set name="p00perfils" table="p00perfil" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidempresa" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P00perfil" />
+        </set>
+        <set name="p10clienteses" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidempresa" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+    </class>
+</hibernate-mapping>

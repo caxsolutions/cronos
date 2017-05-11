@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+
+<h:body>
+
+	<ui:include src="/resources/utils/general.xhtml" />
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="50" resizable="false">
+			<h:outputText value="North unit content." />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="160" header="Menú" resizable="true" closable="false" collapsible="true">
+			<h:form onkeypress="if (event.keyCode == 13) { return false;}" id="formViewportMenu">
+				<p:menu toggleable="true">
+					<p:submenu label="Parámetros">
+						<p:menuitem value="Clientes" actionListener="#{viewportView.renderInclude(1)}" icon="ui-icon-contact" update="polanco"/>
+						<p:menuitem value="Clientes" actionListener="#{viewportView.renderInclude(2)}" icon="ui-icon-contact" update="polanco"/>
+						<p:menuitem value="Clientes" actionListener="#{viewportView.renderInclude(3)}" icon="ui-icon-contact" update="polanco"/>
+					</p:submenu>
+				</p:menu>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<h:panelGrid id="polanco">
+				<ui:include src="#{viewportView.pathIncludeMenu}"/>
+			</h:panelGrid>
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+</html>
+

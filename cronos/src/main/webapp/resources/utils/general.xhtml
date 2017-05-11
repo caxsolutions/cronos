@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:utils="http://java.sun.com/jsf/composite/utils"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- mensajes -->
+	<p:growl id="growl" autoUpdate="true"  showDetail="true" sticky="false" escape="true" life="5000" />
+
+	<!-- dialog procesando ajax -->
+	<p:ajaxStatus onstart="PF('statusAjaxDialog').show();"
+		onsuccess="PF('statusAjaxDialog').hide();" />
+	<p:dialog modal="false"  widgetVar="statusAjaxDialog"
+		header="Procesando..." draggable="false" closable="false"
+		resizable="false">
+		<p:graphicImage
+			value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/resources/images/loading.gif" />
+	</p:dialog>
+	
+</ui:composition>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/07/2016 09:47:48 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P00perfilmenu" table="p00perfilmenu" schema="public" optimistic-lock="version">
+        <comment>Opciones de men? por perfil</comment>
+        <id name="rowidperfilmenu" type="java.lang.Integer">
+            <column name="rowidperfilmenu" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="p00menu" class="com.cronos.modelo.P00menu" fetch="select">
+            <column name="rowidmenu" not-null="true">
+                <comment>Identificador de opci?n de men? del sistema</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="p00perfil" class="com.cronos.modelo.P00perfil" fetch="select">
+            <column name="rowidperfil" not-null="true">
+                <comment>Identificador de perfil de usuario</comment>
+            </column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

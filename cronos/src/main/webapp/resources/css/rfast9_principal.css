@@ -1,0 +1,406 @@
+
+
+.ui-panel .ui-panel-content{
+    padding: 2px !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+	padding : 0.5em 0.4em !important;	
+}
+
+.ui-panelgrid td {
+	border-width : 0px !important;
+	vertical-align:top
+}
+
+.rf_panel ui-panelgrid td {
+	padding : 2px !important;
+	vertical-align:top
+}
+
+.ui-widget-content {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #bed6f8;
+    color: #000000;
+}
+
+.column3 { width: 250px; }
+
+.tdtop {
+   vertical-align:top
+}
+
+.tdmiddle {
+   vertical-align:middle;
+}
+
+/** Colores para los registros de la grilla de la consulta orden medica - historia clinica integral**/
+.rf-treepanel-row-color-proced {
+	background-color: #DDC0F7;
+}
+ 
+.rf-treepanel-row-color-medic {
+	background-color: #F7C0C0;
+}
+
+
+.rf-row-color-entrada-articulosecundario {
+	background-color: #ECE0F8;
+}
+
+/*
+ * Estilo para el splash del login de la aplicacion.
+*/
+.rfw-splashscreen {
+    background-image: url(../../../../Images/r-fast_logo.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #FFFFFF;
+    opacity: 1;
+}
+
+
+#imagenInicio {
+    background-color: #fff;
+    text-shadow: #fff 0 1px 0;
+    position: relative;
+    display: block;
+    height: auto;
+}
+
+#imagenInicio div.imgInicio img {
+    margin-bottom: 1px;
+}
+
+#imagenInicio div.imgInicio {
+    float: left;
+    padding: 8px 17px;
+    margin: 5px;
+    text-align: center;
+    line-height: 14px;
+    color: #333;
+    font-size: 10px;
+    font-family: "Helvetica Neue",sans-serif;
+    height: 130px;
+    width: 140px;
+    overflow: hidden;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.x-ie6 #imagenInicio div.imgInicio,
+.x-ie7 #imagenInicio div.imgInicio,
+.x-ie8 #imagenInicio div.imgInicio {
+    border-top: none;
+    padding: 3px 2px;
+    margin: 2px;
+}
+
+#imagenInicio div.imgInicio-hover {
+    background-color: #eee;
+}
+
+#imagenInicio .x-item-selected {
+    background-color: #D3E1F1 !important;
+}
+
+#imagenInicio div.imgInicio strong {
+    color: #000;
+    display: block;
+}
+
+#imagenInicio div.imgInicio span {
+    color: #999;
+}
+
+/*
+ * Estilo region norte del viewport (logo empresa ,usuario, cerrar sesion)
+*/
+.rfw-regionorte div {
+        color: #04408c;
+        font-size: 12px;
+        font-weight: bold;
+        font-family: tahoma,arial,verdana,sans-serif;   
+}
+
+/*
+ * Estilo para color de fondo de la aplicaci�n.
+ */
+.rfw-colorFondo .x-panel-body-default {
+    background-color: #F7F7F7;
+}
+#panel-1010-body {
+    background-color: aliceblue;
+    opacity:0.5;
+}
+
+/*
+ * Estilo para el copyright de la aplicacion.
+*/
+.rfw-copyright {
+    font-family: Arial,
+         "Helvetica Neue",
+         Helvetica,
+         sans-serif;
+}
+
+/*
+ * Estilo para el la imagen del login (masculino)
+*/
+.rfw-imgLoginMasculino {
+    background-image: url(../resources/images/login/login_masculino.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*
+ * Estilo para el la imagen del login (femenino)
+*/
+.rfw-imgLoginFemenino {
+    background-image: url(../resources/images/login/login_femenino.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*
+ * Estilo para el boton de logout
+*/
+.rfw-botonLogout {
+    background-image: url(../resources/images/login/logout.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*
+ * Estilo para el boton que nos trae la compa�ia en el menu principal.
+*/
+.rfw-botonCia {
+    background-image: url(../../../../Images/search.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*
+ * Estilo para el boton consulta de los datos del control busqueda.
+*/
+.rfw-botonCtlBusq {
+    background-image: url(../../../../Images/search.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 22px;
+}
+
+/*
+ * Estilo para el boton reset de los datos del control busqueda.
+*/
+.rfw-botonCtlBusqReset {
+    background-image: url(../../../../Images/fileclose.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 22px;
+}
+
+/*
+ * Estilo para los campos deshabilitados se vean mas claros.
+ */
+.rfw-textDesabled .x-item-disabled .x-form-item-label, .x-item-disabled .x-form-field, .x-item-disabled .x-form-display-field, .x-item-disabled .x-form-cb-label, .x-item-disabled .x-form-trigger {
+    opacity : 1;
+}
+
+/*
+ * Estilos para el toolbar(imagenes Botones)
+*/
+.rfw-toolbarNuevo {
+    background-image: url(../../../../Images/new.ico);
+    background-repeat: no-repeat;
+}
+
+.rfw-toolbarBuscar {
+    background-image: url(../../../../Images/search-file.ico);
+    background-repeat: no-repeat;
+}
+
+.rfw-toolbarGuardar {
+    background-image: url(../../../../Images/save.ico);
+    background-repeat: no-repeat;
+}
+
+.rfw-toolbarBorrar {
+    background-image: url(../../../../Images/delete.gif);
+    background-repeat: no-repeat;
+}
+
+.rfw-toolbarCancelar {
+    background-image: url(../../../../Images/cancel.ico);
+    background-repeat: no-repeat;
+}
+
+/*
+ * Estilo para las cajas de texto que son requeridas (campos de la forma requeridos),
+ */
+.rfw-campoRequerido .x-form-text {
+    background-color: #F2F5A9;
+}
+
+/*
+ * Estilo para los mensajes de guardado, modificado y eliminado.
+ */
+.rfw-guardadoExitoso {
+    background-image : url(../../../../Images/icon-info.gif);
+    background-repeat: no-repeat;
+}
+
+.rfw-guardadoError {
+    background-image : url(../../../../Images/icon-error.gif);
+    background-repeat: no-repeat;
+}
+
+.rfw-guardadoErrorFormaPrincipal {
+    background-image : url(../images/icon-error.gif);
+    background-repeat: no-repeat;
+}
+
+.rfw-pregunta {
+    background-image : url(../../../../Images/icon-question.gif);
+    background-repeat: no-repeat;
+}
+
+.rfw-Warning{
+    background-image : url(../../../../Images/icon-warning.gif);
+    background-repeat: no-repeat;
+}
+
+/*
+ *  Botones estilo solo para los botones del login.
+ */
+.rfw-botonesLogin .x-btn-default-small {
+    background-image : -moz-linear-gradient(center top , #FFFFFF, #F9F989 48%, #E2E2E2 52%, #BDEF00);
+}
+
+/*
+ * Iconos para los botones del login.
+ */
+.rfw-idiomaCol {
+    background-image : url(../../../../Images/Colombia.ico);
+    background-repeat: no-repeat;
+}
+
+.rfw-idiomaEEUU {
+    background-image : url(../../../../Images/United-States.ico);
+    background-repeat: no-repeat;
+}
+
+/*
+ * Alineaci�n caja de texto valor.
+ */
+.rfw-alineacionValor .x-form-text {
+    text-align : right;
+}
+
+/*
+ * Estilo para el boton refrescar de los gr�ficos.
+*/
+.rfw-botonCtlGraRef {
+    background-image: url(../../../../Images/reload.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 22px;
+}
+
+/*
+ * Estilo para el boton exportar de los gr�ficos.
+*/
+.rfw-botonCtlGraExp {
+    background-image: url(../../../../Images/exportToImage.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 22px;
+}
+
+
+
+/*
+ * Posiciones de odontograma (Letras del Diente Zoom)
+ */
+.rfw-odontoZoomPosicion{
+    font-weight: bold;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    color: red; 
+}
+
+/*
+ * Imagen Diente
+ */
+.rfw-diente {
+    background-image : url(../../../../Images/Diente.png);
+    background-repeat: no-repeat;
+}
+
+/*
+ * Estilo para el boton consultar..
+*/
+.rfw-botonConsultar {
+    background-image: url(../../../../Images/reload.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*
+ * Estilo para el boton Guardar Registro Grilla..
+*/
+.rfw-botonGuardar {
+    background-image: url(../../../../Images/save.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*
+ * Estilo para el boton Aplicar Para metodos..
+*/
+.rfw-botonApply {
+    background-image: url(../../../../Images/apply.ico);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.rfast9_ui-tabs-nav{
+width:auto;
+} 
+
+/*
+* Estilo dia destivo
+*/
+.festivo .ui-state-default {
+    color: red !important;
+    font-weight: bold !important;
+}
+
+/*
+* Estilo dia celebracion
+*/
+.celebracion .ui-state-default {
+    color: rgba(0,196,45,1) !important;
+    font-weight: bold !important;
+}
+
+/**
+* clase para quitarle los botones de subir y bajar de los spinner
+**/
+.rfw_ui-spinner-button .ui-spinner-button{
+	display : none;
+}
+
+/** Color para los registros de la grilla de la consulta de liquidacion**/
+.rf-row-color-liquiproce {
+	background-color: #F6CEE3;
+}
+
+
+
+
+.ui-icon-dinero {
+    background-image: url("#{resource['images/r-fast_logo.jpg']}") !important;
+}
+
+
+

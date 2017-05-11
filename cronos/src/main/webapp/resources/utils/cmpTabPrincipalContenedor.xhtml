@@ -1,0 +1,32 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:utils="http://java.sun.com/jsf/composite/utils"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<script type="text/javascript">
+		$(document).ready( function()
+		{
+			document.getElementById('#{idForm}:hidIdFormCmpTpc').value = "#{idForm}";
+			callMethodEstablecerIdForm();
+		});
+	</script>
+
+		<p:tabView scrollable="true" id="tabViewPrincipal" binding="#{cmpTabPrincipalContenedorView.contendorTabView}" value="#{cmpTabPrincipalContenedorView.adicionTabPrincipalDTOExtList}" var="dataTabPrincipal">
+				
+				<p:ajax event="tabClose" listener="#{cmpTabPrincipalContenedorView.onTabClose}"/>
+				
+				<p:tab title="#{dataTabPrincipal.titulo}" closable="true">
+
+					<object type="text/html" data="#{dataTabPrincipal.nombreXhtml}" width="100%" height="500" border="0"/>
+					<!--<iframe src="#{dataTabPrincipal.nombreXhtml}" width="100%" height="100%" frameborder="0"/>--> 
+					
+				</p:tab>
+		</p:tabView>
+
+	<p:remoteCommand name="callMethodEstablecerIdForm" process="#{idForm}:hidIdFormCmpTpc"/>
+	<h:inputHidden id="hidIdFormCmpTpc" value="#{cmpTabPrincipalContenedorView.idFormCmpTpc}" />
+
+</ui:composition>

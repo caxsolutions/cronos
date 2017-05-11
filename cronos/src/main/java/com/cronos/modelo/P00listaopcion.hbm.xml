@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/07/2016 09:47:48 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P00listaopcion" table="p00listaopcion" schema="public" optimistic-lock="version">
+        <comment>Tabla de lista de opciones del sistema</comment>
+        <id name="rowidopcion" type="java.lang.Integer">
+            <column name="rowidopcion" />
+            <generator class="assigned" />
+        </id>
+        <property name="variable" type="java.lang.String">
+            <column name="variable" length="30" not-null="true">
+                <comment>Nombre de variable de origen</comment>
+            </column>
+        </property>
+        <property name="descripcion" type="java.lang.String">
+            <column name="descripcion" length="60" not-null="true">
+                <comment>Descripci?n de la variable de origen</comment>
+            </column>
+        </property>
+        <property name="valor" type="java.lang.Integer">
+            <column name="valor" not-null="true">
+                <comment>Valor de la opcion</comment>
+            </column>
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="nombre" length="60" not-null="true">
+                <comment>Nombre de la opci?n</comment>
+            </column>
+        </property>
+        <property name="abreviacion" type="java.lang.String">
+            <column name="abreviacion" length="4">
+                <comment>Abreviaci?n del nombra de la opci?n</comment>
+            </column>
+        </property>
+        <property name="condicion" type="java.lang.String">
+            <column name="condicion" length="10">
+                <comment>Condici?n de filtro para la opci?n</comment>
+            </column>
+        </property>
+        <property name="habilita" type="boolean">
+            <column name="habilita" not-null="true">
+                <comment>Opci?n habilitada para su uso en el sistema?</comment>
+            </column>
+        </property>
+        <property name="validacion" type="java.lang.String">
+            <column name="validacion" length="32" not-null="true">
+                <comment>Hash de validaci?n</comment>
+            </column>
+        </property>
+        <set name="p10clientesesForRowidtipoidentificacion" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidtipoidentificacion" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+        <set name="p10clientesesForRowidtipocliente" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidtipocliente" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+        <set name="p10clientesesForRowidsexo" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidsexo" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+        <set name="p10clientesesForRowidestadocivil" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidestadocivil" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+        <set name="p10clientesesForRowidtipoprofesion" table="p10clientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidtipoprofesion" not-null="true" />
+            </key>
+            <one-to-many class="com.cronos.modelo.P10clientes" />
+        </set>
+    </class>
+</hibernate-mapping>

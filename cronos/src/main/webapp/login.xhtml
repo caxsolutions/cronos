@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>Cronos v1.0</title>
+		<meta name="content-type" content="text/html; charset=UTF-8"/>
+		<link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
+		<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/resources/login/css/style.css"/>
+        <script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/resources/login/js/index.js"></script>
+    </h:head>
+	<h:body>
+
+		<p:growl id="msgGrowlLogin" autoUpdate="true" showDetail="false"/>
+		
+	    <div class="wrapper">
+			<div class="container">
+				<h1>Cronos</h1>
+				
+				<h:form styleClass="form">
+					<p:inputText id="usernameField" name="j_username" value="#{loginView.userId}" placeholder="Usuario" styleClass="input_per" />
+					<p:password id="passwordField" name="j_password" value="#{loginView.password}" placeholder="Clave" feedback="false" styleClass="input_per"/>
+					<p:commandButton type="submit" styleClass="button_per" id="login-button" action="#{loginView.login}" value="Entrar" update="msgGrowlLogin"/>
+				</h:form>
+			</div>
+		
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		
+	</h:body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<center>
+		<p:layout>
+			<p:layoutUnit position="west" size="155">
+				<p:graphicImage title="idora v 1.0" value="../resources/images/logo_idora_banner.png" width="100%"/>
+			</p:layoutUnit>
+			
+			<p:layoutUnit position="east" size="400">
+				<p:layout>
+					<p:layoutUnit position="west" size="48">
+						<p:graphicImage value="../resources/images/nobody_m.original.jpg"  height="46" width="100%"/>
+					</p:layoutUnit>
+					
+					<p:layoutUnit position="center">
+
+						<!--
+						<p:outputLabel binding="#{cfgInitialMenuView.lbllogin}" style="font-size:13px;color:red;"/>
+
+						<h:panelGrid border="0" columns="2">
+							<p:outputLabel binding="#{cfgInitialMenuView.lblPefil}"/>	
+
+							<h:outputLink value="../j_spring_security_logout">logout</h:outputLink>
+						</h:panelGrid>
+						--> 
+					</p:layoutUnit>
+				</p:layout>			
+			</p:layoutUnit>
+			
+			<p:layoutUnit position="center"/>
+		</p:layout>
+	</center>
+</ui:composition>

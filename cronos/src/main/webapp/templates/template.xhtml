@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html" id="fview">
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>..:: idora ::..</title>
+		<ui:debug />
+		<f:metadata>
+			<ui:insert name="metadata" />
+		</f:metadata>
+		
+		<h:head>	
+			<ui:include src="/resources/utils/general.xhtml"/>
+		</h:head>
+
+	<h:body>
+
+		<p:layout fullPage="true" resizeTitle="resize" style="background-color:#FFFFFF;">
+
+			<p:layoutUnit position="north" size="64" id="north" >
+				<ui:include src="header.xhtml" />
+			</p:layoutUnit>
+	
+			<p:layoutUnit position="west" id="west" resizable="false" header="Menú" style="height:580px;overflow:hidden;" size="160">
+				<ui:include src="menu.xhtml" />
+				<p></p>
+				<p:clock/>
+			</p:layoutUnit>
+			
+			<p:layoutUnit position="center">
+				<h:form id="mainForm">
+					<ui:insert name="content" />
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
+
+	</h:body>
+</f:view>
+</html>		

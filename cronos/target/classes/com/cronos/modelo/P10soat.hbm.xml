@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/07/2016 02:29:18 PM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P10soat" table="p10soat" schema="public" optimistic-lock="version">
+        <comment>soat ara los vehiculos</comment>
+        <id name="rowidsoat" type="java.lang.Integer">
+            <column name="rowidsoat" />
+            <generator class="sequence" >
+		        <param name="sequence">p10soat_rowidsoat_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="p10clientes" class="com.cronos.modelo.P10clientes" fetch="select">
+            <column name="rowidtomador" not-null="true" />
+        </many-to-one>
+        <many-to-one name="p10vehiculos" class="com.cronos.modelo.P10vehiculos" fetch="select">
+            <column name="rowidvehiculo" not-null="true" />
+        </many-to-one>
+        <property name="habilita" type="java.lang.Boolean">
+            <column name="habilita" not-null="true" />
+        </property>
+        <property name="fechaexpedicion" type="java.util.Date">
+            <column name="fechaexpedicion" length="13" not-null="true" />
+        </property>
+        <property name="fechainiciovigencia" type="java.util.Date">
+            <column name="fechainiciovigencia" length="13" not-null="true" />
+        </property>
+        <property name="observaciones" type="java.lang.String">
+            <column name="observaciones" length="200" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</h:head>
+
+<h:body>
+
+	<b:container>
+	
+		<ui:include src="/resources/utils/general.xhtml" />
+	
+		<p:layout fullPage="true">
+	
+			<p:layoutUnit position="north" size="50" resizable="false">
+				<h:outputText value="North unit content." />
+			</p:layoutUnit>
+	
+			<p:layoutUnit position="west" size="160" header="Menú" resizable="true" closable="false" collapsible="true">
+				<h:form onkeypress="if (event.keyCode == 13) { return false;}" id="formViewportMenu">
+					<p:menu toggleable="true">
+						<p:submenu label="General">
+							<p:menuitem value="Promotores" actionListener="#{cmpTabPrincipalContenedorView.adicionarTab(1, 'Promotores', 'p10promotores')}" icon="ui-icon-contact"/>
+							<p:menuitem value="Clientes" actionListener="#{cmpTabPrincipalContenedorView.adicionarTab(2, 'Clientes', 'p10clientes')}" icon="ui-icon-contact"/>
+							<p:menuitem value="Vehiculos" actionListener="#{cmpTabPrincipalContenedorView.adicionarTab(3, 'Vehiculos', 'p10vehiculos')}" icon="ui-icon-contact"/>
+						</p:submenu>
+						<p:submenu label="Producción">
+							<p:menuitem value="Polizas" actionListener="#{cmpTabPrincipalContenedorView.adicionarTab(4, 'Polizas', 'p10polizas')}" icon="ui-icon-contact"/>
+						</p:submenu>
+					</p:menu>
+				</h:form>
+			</p:layoutUnit>
+	
+			<p:layoutUnit position="center">
+				<h:form onkeypress="if (event.keyCode == 13) { return false;}" id="formViewport">
+					<ui:include src="/resources/utils/cmpTabPrincipalContenedor.xhtml">
+						<ui:param name="idForm" value="formViewport" />
+					</ui:include>
+				</h:form>
+			</p:layoutUnit>
+	
+		</p:layout>
+
+	</b:container>
+	
+</h:body>
+</html>
+

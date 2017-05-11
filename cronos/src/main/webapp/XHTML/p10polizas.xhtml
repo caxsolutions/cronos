@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<ui:include src="/resources/utils/general.xhtml"/>
+</h:head>		
+
+<h:body>
+	<h:form id="formP10polizas">
+		
+		<p:toolbar id="toolbarFormP10polizas">
+	        <f:facet name="left">
+	            <p:commandButton process="@this" id="btnNuevo" action="#{p10polizasView.action_new}" update="@(form)"  binding="#{p10polizasView.btnNuevo}"  value="Nuevo" icon="ui-icon-document" />
+	            <p:commandButton process="@this" value="Buscar" icon="ui-icon-search" oncomplete="PF('widgetDialogBusquedaPrincipal').show();" action="#{p10polizasView.action_search}" update="formP10polizas:dialogBusquedaPrincipal"/>
+	            <p:commandButton process="@form" id="btnGuardar" action="#{p10polizasView.action_save}" update="@(this)" binding="#{p10polizasView.btnGuardar}" value="Guardar" icon="ui-icon-disk" />
+	            <p:commandButton value="Eliminar" binding="#{p10polizasView.btnDelete}" icon="ui-icon-trash" oncomplete="PF('widgetConfirmDelete').show();"/>
+	 
+	            <span class="ui-separator">
+	                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	        </f:facet>
+	    </p:toolbar>	
+	    
+	    <p:sticky target="toolbarFormP10polizas" />
+	    
+	    <p></p>
+	
+		<p:panel id="panelP10polizas" header="Polizas">
+
+			<p:panel>
+				<h:panelGrid columns="5">
+
+			        <p:outputLabel for="txtNroPoliza" value="Número de poliza:" />
+			        <p:inputText id="txtNroPoliza" binding="#{p10polizasView.txtNroPoliza}" size="20" maxlength="60" style="background-color:#feffb8"/>
+		
+					<p:outputLabel/>
+					<p:outputLabel/>
+					<p:outputLabel/>
+					
+			        <p:outputLabel for="tipoIdentificacionTomador" value="Tomador:" />
+			        <p:selectOneMenu id="tipoIdentificacionTomador" value="#{p10polizasView.selTipoIdentificacionTomador}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10polizasView.selTipoIdentificacionTomadorList}" var="viaTipoIdentificacionTomador" />
+		                <p:ajax event="change" listener="#{p10polizasView.onRowBuscarTomador}" update="formP10polizas:txtRazonSocialTomador"/>
+			        </p:selectOneMenu>
+			        
+			        <p:inputText id="txtNroIdentificacionTomador" binding="#{p10polizasView.txtNroIdentificacionTomador}" size="24" maxlength="60" style="background-color:#feffb8">
+			        	<p:ajax event="change" listener="#{p10polizasView.onRowBuscarTomador}" update="formP10polizas:txtRazonSocialTomador"/>
+			        </p:inputText>
+
+			        <p:commandButton icon="ui-icon-search" action="#{p10polizasView.action_dialogDatosCliente(1)}"/>
+			        <p:inputText id="txtRazonSocialTomador" binding="#{p10polizasView.txtRazonSocialTomador}" size="50" readonly="true"/>
+
+			        <p:outputLabel for="tipoIdentificacionAsegurado" value="Asegurado:" />
+			        <p:selectOneMenu id="tipoIdentificacionAsegurado" value="#{p10polizasView.selTipoIdentificacionAsegurado}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10polizasView.selTipoIdentificacionAseguradoList}" var="viaTipoIdentificacionAsegurado"/>
+		                <p:ajax event="change" listener="#{p10polizasView.onRowBuscarAsegurado}" update="formP10polizas:txtRazonSocialAsegurado"/>
+			        </p:selectOneMenu>
+			        
+			        <p:inputText id="txtNroIdentificacionAsegurado" binding="#{p10polizasView.txtNroIdentificacionAsegurado}" size="24" maxlength="60" style="background-color:#feffb8">
+			        	<p:ajax event="change" listener="#{p10polizasView.onRowBuscarAsegurado}" update="formP10polizas:txtRazonSocialAsegurado"/>
+			        </p:inputText>
+
+			        <p:commandButton icon="ui-icon-search"/>
+			        <p:inputText id="txtRazonSocialAsegurado" binding="#{p10polizasView.txtRazonSocialAsegurado}" size="50" readonly="true"/>
+
+			        <p:outputLabel for="tipoIdentificacionBeneficiario" value="Beneficiario:" />
+			        <p:selectOneMenu id="tipoIdentificacionBeneficiario" value="#{p10polizasView.selTipoIdentificacionBeneficiario}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10polizasView.selTipoIdentificacionBeneficiarioList}" var="viaTipoIdentificacionBeneficiario"/>
+		                <p:ajax event="change" listener="#{p10polizasView.onRowBuscarBeneficiario}" update="formP10polizas:txtRazonSocialBeneficiario"/>
+			        </p:selectOneMenu>
+			        
+			        <p:inputText id="txtNroIdentificacionBeneficiario" binding="#{p10polizasView.txtNroIdentificacionBeneficiario}" size="24" maxlength="60" style="background-color:#feffb8">
+			        	<p:ajax event="change" listener="#{p10polizasView.onRowBuscarBeneficiario}" update="formP10polizas:txtRazonSocialBeneficiario"/>
+			        </p:inputText>
+
+			        <p:commandButton icon="ui-icon-search"/>
+			        <p:inputText id="txtRazonSocialBeneficiario" binding="#{p10polizasView.txtRazonSocialBeneficiario}" size="50" readonly="true"/>
+
+				</h:panelGrid>
+			</p:panel>
+			
+			<p></p>
+			
+			<p:fieldset legend="Datos de la aseguradora y vigencia">
+				<h:panelGrid columns="8">
+					<p:outputLabel for="tipoAseguradora" value="Aseguradora:" />
+			        <p:selectOneMenu id="tipoAseguradora" value="#{p10polizasView.tipoAseguradora}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10polizasView.tipoAseguradoraList}" var="viaTipoAseguradora" />
+			        </p:selectOneMenu>
+
+					<p:outputLabel for="tipoAseguradoraRamo" value="Ramo:" />
+			        <p:selectOneMenu id="tipoAseguradoraRamo" value="#{p10polizasView.tipoAseguradoraRamo}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10polizasView.tipoAseguradoraRamoList}" var="viaTipoAseguradoraRamo" />
+			        </p:selectOneMenu>
+					
+					<p:outputLabel value="Fecha Inicio vigencia:"/>
+					<p:calendar binding="#{p10polizasView.calFechaInicioVigencia}" pattern="yyyy-MM-dd" mask="true" size="8" showOn="button">
+						<p:ajax event="dateSelect" listener="#{p10polizasView.eventoCambiarFechaInicioVigencia}" update="formP10polizas:calFechaFinalVigencia"/>
+					</p:calendar>
+					<p:outputLabel value="Hasta"/>
+					<p:calendar id="calFechaFinalVigencia" binding="#{p10polizasView.calFechaFinalVigencia}" pattern="yyyy-MM-dd" mask="true" disabled="true" size="8"/>
+					
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p></p>
+			
+			<p:fieldset legend="Valores de la poliza">
+				<h:panelGrid columns="5">
+					<p:outputLabel value="Riesgo asegurado" />
+					<p:outputLabel value="Prima neta" />
+					<p:outputLabel value="Gastos" />
+					<p:outputLabel value="Valor IVA" />
+					<p:outputLabel value="Total Prima" />
+
+					<p:inputNumber id="monValorRiesgoAsegurado" value="#{p10polizasView.monValorRiesgoAsegurado}" symbol="$ " size="15" validatorMessage="El valor debe ser mayor a cero." decimalPlaces="2" minValue="-999999999999999999999">
+						<f:validateDoubleRange minimum="0"/>
+					</p:inputNumber>
+					
+					<p:inputNumber id="monValorPrima" value="#{p10polizasView.monValorPrima}" symbol="$ " size="15" validatorMessage="El valor debe ser mayor a cero." decimalPlaces="2" minValue="-999999999999999999999">
+						<f:validateDoubleRange minimum="0"/>
+					</p:inputNumber>
+
+					<p:inputNumber id="monValorGastos" value="#{p10polizasView.monValorGastos}" symbol="$ " size="15" validatorMessage="El valor debe ser mayor a cero." decimalPlaces="2" minValue="-999999999999999999999">
+						<f:validateDoubleRange minimum="0"/>
+					</p:inputNumber>
+
+					<p:inputNumber id="monValorIVA" value="#{p10polizasView.monValorIVA}" symbol="$ " size="15" validatorMessage="El valor debe ser mayor a cero." decimalPlaces="2" minValue="-999999999999999999999">
+						<f:validateDoubleRange minimum="0"/>
+					</p:inputNumber>
+
+					<p:inputNumber id="monValorTotalPrima" value="#{p10polizasView.monValorTotalPrima}" symbol="$ " size="15" validatorMessage="El valor debe ser mayor a cero." decimalPlaces="2" minValue="-999999999999999999999">
+						<f:validateDoubleRange minimum="0"/>
+					</p:inputNumber>
+					
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p></p>
+			
+			<p:fieldset legend="Pago de la poliza">
+				<h:panelGrid columns="5">
+					
+					<p:outputLabel for="selTipoFormasPago" value="Formas de pago:" />
+			        <p:selectOneMenu id="selTipoFormasPago" value="#{p10polizasView.selTipoFormasPago}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10polizasView.selTipoFormasPagoList}" var="viaSelTipoFormasPago" />
+		                <p:ajax event="change" listener="#{p10polizasView.action_tipoFormaPago}" update="formP10polizas:rdFormaPagoContado:" />
+			        </p:selectOneMenu>
+			        
+					<p:selectOneRadio id="rdFormaPagoContado" binding="#{p10polizasView.rdFormaPagoContado}" rendered="#{p10polizasView.renderRdFormaPagoContado}">
+			            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+			            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+			            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+			        </p:selectOneRadio>			        	
+
+				</h:panelGrid>
+			</p:fieldset>
+		</p:panel>
+
+		<!-- *********************************************************************************************************** -->
+	    <p:confirmDialog showEffect="explode" hideEffect="explode" widgetVar="widgetConfirmDelete" header="Eliminar registro" message="Desea eliminar el registro?" global="true">
+			<p:commandButton value="Si" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" process="@form" action="#{p10polizasView.action_delete}" update="@(form)" oncomplete="PF('widgetConfirmDelete').hide();"/>
+			<p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('widgetConfirmDelete').hide();"/>
+		</p:confirmDialog>
+
+		<p:dialog id="dialogBusquedaPrincipal" header="Busqueda clientes" widgetVar="widgetDialogBusquedaPrincipal" width="700" height="400" modal="false">
+		
+			<p:dataTable var="busquedaPrincipal" value="#{p10polizasView.busquedaPrincipalList}"
+				selectionMode="single" selection="#{p10polizasView.busquedaPrincipal}" rowKey="#{busquedaPrincipal.rowidcliente}"
+				rows="60" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			 
+			 	<p:ajax event="rowSelect" listener="#{p10polizasView.onRowSelect}" update="@(form)" />
+			 
+			    <p:column headerText="Tipo documento">
+			        <h:outputText value="#{busquedaPrincipal.p00listaopcionByRowidtipoidentificacion.abreviacion}" />
+			    </p:column>
+
+			    <p:column headerText="Número documento">
+			        <h:outputText value="#{busquedaPrincipal.numeroidentificacion}" />
+			    </p:column>
+
+			    <p:column headerText="Razón social">
+			        <h:outputText value="#{busquedaPrincipal.razonsocial}" />
+			    </p:column>
+
+			    <p:column headerText="Nombres">
+			        <h:outputText value="#{busquedaPrincipal.nombres}" />
+			    </p:column>
+
+			    <p:column headerText="Apellidos">
+			        <h:outputText value="#{busquedaPrincipal.apellidos}" />
+			    </p:column>
+			</p:dataTable>
+			
+ 	        <f:facet name="footer">
+              		<p:commandButton value="Cerrar" icon="ui-icon-close" oncomplete="PF('widgetDialogBusquedaPrincipal').hide();"/>
+          		</f:facet> 					
+		</p:dialog>
+		<!-- *********************************************************************************************************** -->
+		
+	</h:form>
+</h:body>	
+</html>	

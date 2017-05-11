@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6/07/2016 09:47:48 AM by Hibernate Tools 4.3.1.Final -->
+<hibernate-mapping>
+    <class name="com.cronos.modelo.P00menu" table="p00menu" schema="public" optimistic-lock="version">
+        <comment>Opciones de men? del sistema</comment>
+        <id name="rowidmenu" type="java.lang.Integer">
+            <column name="rowidmenu" />
+            <generator class="assigned" />
+        </id>
+        <property name="indice" type="java.lang.String">
+            <column name="indice" length="20" not-null="true" unique="true">
+                <comment>Indice de la opci?n de men?</comment>
+            </column>
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="nombre" length="80" not-null="true">
+                <comment>Nombre de la opci?n de men?</comment>
+            </column>
+        </property>
+        <property name="imagen" type="java.lang.String">
+            <column name="imagen" length="100" not-null="true">
+                <comment>Nombre de la im?gen del nodo</comment>
+            </column>
+        </property>
+        <property name="habilita" type="boolean">
+            <column name="habilita" not-null="true">
+                <comment>Opci?n de men? habilitada en el sistema?</comment>
+            </column>
+        </property>
+        <property name="encabezado" type="java.lang.String">
+            <column name="encabezado" not-null="true">
+                <comment>Es un root de ?rbol de men??</comment>
+            </column>
+        </property>
+        <property name="componentes" type="java.lang.String">
+            <column name="componentes" length="80">
+                <comment>Componentes a los cuales se habilita la opci?n de men? (NULL=Se habilita siempre)</comment>
+            </column>
+        </property>
+        <property name="expandido" type="java.lang.String">
+            <column name="expandido" not-null="true">
+                <comment>Item de men? expandido por defecto?</comment>
+            </column>
+        </property>
+        <property name="instanciamultiple" type="java.lang.String">
+            <column name="instanciamultiple" not-null="true">
+                <comment>Permite multiples instancias del formulario adscrito a la opci?n de men??</comment>
+            </column>
+        </property>
+        <property name="validacion" type="java.lang.String">
+            <column name="validacion" length="32" not-null="true">
+                <comment>Hash de validaci?n</comment>
+            </column>
+        </property>
+        <set name="p00perfilmenus" table="p00perfilmenu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="rowidmenu" not-null="true">
+                    <comment>Identificador de opci?n de men? del sistema</comment>
+                </column>
+            </key>
+            <one-to-many class="com.cronos.modelo.P00perfilmenu" />
+        </set>
+    </class>
+</hibernate-mapping>

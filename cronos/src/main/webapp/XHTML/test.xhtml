@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:b="http://bootsfaces.net/ui"
+          xmlns:p="http://primefaces.org/ui"
+          xmlns:ui="http://java.sun.com/jsf/facelets">
+        <h:head>
+            <meta name="author" content="Riccardo Massera"></meta>
+        </h:head>
+        <h:body style="padding-top: 5px">
+          <div class="ui-grid ui-grid-responsive">
+              <div class="ui-grid-row-col2">
+                  <div id="menuLeft">
+                       <ui:include src="test2.xhtml" />
+                  </div>
+                  <div id="ber">
+                      <p:panel id="principalePanel" title="principale" >
+                         <ui:include src="#{viewportView.page}" />
+                      </p:panel>
+                  </div>
+              </div>
+          </div>
+        </h:body>
+    </html>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<ui:include src="/resources/utils/general.xhtml"/>
+</h:head>		
+
+<h:body>
+	<h:form id="formP10clientes">
+
+	    <f:metadata>
+	        <f:event type="preRenderView"  listener="#{p10clientesView.onloadView}" />
+			<f:viewParam name="fnRowidCliente" value="#{p10clientesView.fnRowidCliente}" />  	
+		</f:metadata>
+		
+		<p:toolbar id="toolbarFormP10clientes">
+	        <f:facet name="left">
+	            <p:commandButton process="@(this)" id="btnNuevo" action="#{p10clientesView.action_new}" update="formP10clientes"  binding="#{p10clientesView.btnNuevo}"  value="Nuevo" icon="ui-icon-document" />
+	            <p:commandButton process="@(this)" id="btnBuscar" binding="#{p10clientesView.btnBuscar}" value="Buscar" icon="ui-icon-search" oncomplete="PF('widgetDialogBusquedaPrincipal').show();" action="#{p10clientesView.action_search}" update="formP10clientes:dialogBusquedaPrincipal"/>
+	            <p:commandButton process="@(form)" id="btnGuardar" action="#{p10clientesView.action_save}" update="@(this)" binding="#{p10clientesView.btnGuardar}" value="Guardar" icon="ui-icon-disk" />
+	            <p:commandButton value="Eliminar" binding="#{p10clientesView.btnDelete}" icon="ui-icon-trash" oncomplete="PF('widgetConfirmDelete').show();"/>
+	 
+	            <span class="ui-separator">
+	                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	        </f:facet>
+	    </p:toolbar>	
+	    
+	    <p:sticky target="toolbarFormP10clientes" />
+	    
+	    <p></p>
+	
+		<p:panel id="panelP10clientes" header="Clientes">
+
+			<p:panel>
+				<h:panelGrid columns="8">
+		
+			        <p:outputLabel for="tipoCliente" value="Tipo de cliente:" />
+			        <p:selectOneMenu id="tipoCliente" value="#{p10clientesView.selTipoCliente}" style="width:125px">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10clientesView.selTipoClienteList}" var="viaTipoCliente"/>
+		                <p:ajax event="change" listener="#{p10clientesView.onRowSelTipoCliente}" update="formP10clientes:tipoIdentificacion, formP10clientes:panelRazonsocial"/>
+			        </p:selectOneMenu>
+		
+			        <p:outputLabel for="tipoIdentificacion" value="Tipo de identificación:" />
+			        <p:selectOneMenu id="tipoIdentificacion" value="#{p10clientesView.selTipoIdentificacion}" style="width:150px" binding="#{p10clientesView.cmbtipoIdentificacion}">
+						<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+		                <f:selectItems value="#{p10clientesView.selTipoIdentificacionList}" var="viaTipoIdentificacion"/>
+			        </p:selectOneMenu>
+			        
+			        <p:outputLabel for="txtNroIdentificacion" value="Número de identificación:" />
+			        <p:inputText id="txtNroIdentificacion" binding="#{p10clientesView.txtNroIdentificacion}" size="13" maxlength="60">
+			        	<p:ajax event="blur" listener="#{p10clientesView.onCalcularDigitoVerificacion}" update="formP10clientes:txtDigitoVerificacion"/>
+			        </p:inputText>
+			        
+			        <p:outputLabel value="-" />
+			        <p:inputText id="txtDigitoVerificacion" binding="#{p10clientesView.txtDigitoVerificacion}" size="5" disabled="true" maxlength="1"/>
+			        		
+				</h:panelGrid>
+			</p:panel>
+				
+			<p></p>
+				
+			<p:panel id="panelRazonsocial" binding="#{p10clientesView.panelRazonsocial}" visible="false">
+				<h:panelGrid columns="2">
+			        <p:outputLabel for="txtRazonSocial" value="Razón social:" />
+			        <p:inputText id="txtRazonSocial" binding="#{p10clientesView.txtRazonSocial}" size="50" onkeyup="this.value=this.value.toUpperCase();" maxlength="120"/>
+				</h:panelGrid>
+			</p:panel>
+			
+			<p></p>
+			
+			<p:panel>
+				<p:fieldset legend="Datos personales" toggleable="true">
+					<h:panelGrid columns="4">
+
+				        <p:outputLabel for="txtNombres" value="Nombres:" />
+				        <p:inputText id="txtNombres" binding="#{p10clientesView.txtNombres}" size="50" onkeyup="this.value=this.value.toUpperCase();"/>
+
+				        <p:outputLabel for="txtApellidos" value="Apellidos:" />
+				        <p:inputText id="txtApellidos" binding="#{p10clientesView.txtApellidos}" size="50" onkeyup="this.value=this.value.toUpperCase();"/>
+
+						<p:outputLabel for="calFechaNacimiento" value="Fecha de nacimiento:" />
+						<h:panelGrid columns="3">
+							<p:calendar id="calFechaNacimiento" value="#{p10clientesView.calFechaNacimiento}" showOn="button" pattern="yyyy/MM/dd" mask="true" size="10"/>
+
+					        <p:outputLabel for="tipoGenero" value="Genero:" />
+					        <p:selectOneMenu id="tipoGenero" value="#{p10clientesView.selTipoGenero}" style="width:100px">
+								<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+				                <f:selectItems value="#{p10clientesView.selTipoGeneroList}" var="viaTipoGenero"/>
+					        </p:selectOneMenu>
+						</h:panelGrid>
+
+				        <p:outputLabel for="tipoEstadoCivil" value="Estado civil:" />
+				        <p:selectOneMenu id="tipoEstadoCivil" value="#{p10clientesView.selTipoEstadoCivil}" style="width:100px">
+							<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+			                <f:selectItems value="#{p10clientesView.selTipoEstadoCivilList}" var="viaTipoEstadoCivil"/>
+				        </p:selectOneMenu>
+
+				        <p:outputLabel for="txtDireccion" value="Dirección:" />
+				        <p:inputText id="txtDireccion" binding="#{p10clientesView.txtDireccion}" size="50" maxlength="60"/>
+
+				        <p:outputLabel for="txtTelefonos" value="Telefonos:" />
+				        <h:panelGrid columns="3">
+					        <p:inputText id="txtTelefonos" binding="#{p10clientesView.txtTelefonos}" size="16" maxlength="60"/>
+					        
+					        <p:outputLabel for="txtCelular" value="Celular:" />
+					        <p:inputText id="txtCelular" binding="#{p10clientesView.txtCelular}" size="21" maxlength="200"/>
+				        </h:panelGrid>
+
+				        <p:outputLabel for="txtCorreopersonal" value="Correo personal:" />
+				        <p:inputText id="txtCorreopersonal" binding="#{p10clientesView.txtCorreopersonal}" size="50" maxlength="100"/>
+
+				        <p:outputLabel for="chHijos" value="Tiene hijos:" />
+				        <h:panelGrid columns="3">
+					        <p:selectBooleanCheckbox id="chHijos" binding="#{p10clientesView.chHijos}">
+					        	<p:ajax listener="#{p10clientesView.onCambioTieneHijos}" update="formP10clientes:numCantidadHijos"/>
+					        </p:selectBooleanCheckbox>
+							
+							<p:spinner id="numCantidadHijos" binding="#{p10clientesView.numCantidadHijos}" disabled="true" size="3" min="0"/>
+						</h:panelGrid>
+						
+						<p:outputLabel for="selDepartamento" value="Departamento:" />
+						<p:selectOneMenu id="selDepartamento" value="#{p10clientesView.selDepartamento}" style="width:150px" filter="true" filterMatchMode="contains">
+				            <f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+			                <f:selectItems value="#{p10clientesView.selDepartamentoList}" var="viaDepartamento"/>
+			                <p:ajax event="change" listener="#{p10clientesView.onRowSelDepartamento}" update="formP10clientes:selMunicipio"/>
+				        </p:selectOneMenu>								
+
+						<p:outputLabel for="selMunicipio" value="Municipio:" />
+						<p:selectOneMenu id="selMunicipio" binding="#{p10clientesView.cbSelMunicipio}" value="#{p10clientesView.selMunicipio}" style="width:150px" filter="true" filterMatchMode="contains" disabled="true">
+				            <f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+			                <f:selectItems value="#{p10clientesView.selMunicipioList}" var="viaMunicipio"/>
+				        </p:selectOneMenu>								
+														
+						<p:outputLabel for="rdTitularvivienda" value="Titular de la vivienda:" />
+				        <p:selectOneRadio id="rdTitularvivienda" value="#{p10clientesView.rdTitularvivienda}">
+				            <f:selectItem itemLabel="Propia" itemValue="1" />
+				            <f:selectItem itemLabel="Familiar" itemValue="2" />
+				            <f:selectItem itemLabel="Con hipoteca" itemValue="3" />
+				            <f:selectItem itemLabel="Alquilada" itemValue="4" />
+				        </p:selectOneRadio>								
+						
+					</h:panelGrid>
+				</p:fieldset>
+				<p></p>
+				<p:fieldset legend="Datos laborales" toggleable="true">
+					<h:panelGrid columns="4">
+
+				        <p:outputLabel for="tipoProfesion" value="Ocupación:" />
+				        <p:selectOneMenu id="tipoProfesion" value="#{p10clientesView.selTipoProfesion}" style="width:100px">
+							<f:selectItem itemLabel="-Seleccione-" itemValue="#{null}" />
+			                <f:selectItems value="#{p10clientesView.selTipoProfesionList}" var="viaTipoProfesion"/>
+				        </p:selectOneMenu>
+
+				        <p:outputLabel for="txtDescProfesion" value="Descripción:" />
+				        <p:inputText id="txtDescProfesion" binding="#{p10clientesView.txtDescProfesion}" size="50" maxlength="100"/>
+
+				        <p:outputLabel for="txtEmpresa" value="Empresa:" />
+				        <p:inputText id="txtEmpresa" binding="#{p10clientesView.txtEmpresa}" size="50" maxlength="100"/>
+
+				        <p:outputLabel for="txtCorreoinstitucional" value="Correo institucional:" />
+				        <p:inputText id="txtCorreoinstitucional" binding="#{p10clientesView.txtCorreoinstitucional}" size="50" maxlength="100"/>
+
+				        <p:outputLabel for="txtDireccionEmpresa" value="Dirección:" />
+				        <p:inputText id="txtDireccionEmpresa" binding="#{p10clientesView.txtDireccionEmpresa}" size="50" maxlength="60"/>
+						
+				        <p:outputLabel for="txtTelefonosEmpresa" value="Telefonos:" />
+				        <p:inputText id="txtTelefonosEmpresa" binding="#{p10clientesView.txtTelefonosEmpresa}" size="50" maxlength="60"/>
+					</h:panelGrid>
+				</p:fieldset>
+
+			</p:panel>
+		
+		</p:panel>
+
+		<!-- ******************************************************************************************************************************************************* -->
+	    <p:confirmDialog showEffect="explode" hideEffect="explode" widgetVar="widgetConfirmDelete" header="Eliminar registro" message="Desea eliminar el registro?">
+			<p:commandButton value="Si" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" process="@form" action="#{p10clientesView.action_delete}" update="@(form)" oncomplete="PF('widgetConfirmDelete').hide();"/>
+			<p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" oncomplete="PF('widgetConfirmDelete').hide();"/>
+		</p:confirmDialog>
+
+		<p:dialog id="dialogBusquedaPrincipal" header="Busqueda clientes" widgetVar="widgetDialogBusquedaPrincipal" width="700" height="400" modal="true">
+		
+			<p:dataTable var="busquedaPrincipal" value="#{p10clientesView.busquedaPrincipalList}"
+				selectionMode="single" selection="#{p10clientesView.busquedaPrincipal}" rowKey="#{busquedaPrincipal.rowidcliente}"
+				rows="60" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			 
+			 	<p:ajax event="rowSelect" listener="#{p10clientesView.onRowSelect}" update="@(form)" />
+			 
+			    <p:column headerText="Tipo documento">
+			        <h:outputText value="#{busquedaPrincipal.p00listaopcionByRowidtipoidentificacion.abreviacion}" />
+			    </p:column>
+
+			    <p:column headerText="Número documento">
+			        <h:outputText value="#{busquedaPrincipal.numeroidentificacion}" />
+			    </p:column>
+
+			    <p:column headerText="Razón social">
+			        <h:outputText value="#{busquedaPrincipal.razonsocial}" />
+			    </p:column>
+
+			    <p:column headerText="Nombres">
+			        <h:outputText value="#{busquedaPrincipal.nombres}" />
+			    </p:column>
+
+			    <p:column headerText="Apellidos">
+			        <h:outputText value="#{busquedaPrincipal.apellidos}" />
+			    </p:column>
+			</p:dataTable>
+			
+ 	        <f:facet name="footer">
+              		<p:commandButton value="Cerrar" icon="ui-icon-close" oncomplete="PF('widgetDialogBusquedaPrincipal').hide();"/>
+          		</f:facet> 					
+		</p:dialog>
+		<!-- ******************************************************************************************************************************************************* -->
+		
+	</h:form>
+</h:body>	
+</html>	
